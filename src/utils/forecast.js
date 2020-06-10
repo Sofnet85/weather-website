@@ -10,8 +10,11 @@ const forecast = (lat, lon, location, callback) => {
       callback(`${response.body.message}`)
     } else {
       const celsius = Math.trunc((response.body.main.temp) - 273.15)
+      const max = Math.trunc((response.body.main.temp_max) - 273.15)
+      const min = Math.trunc((response.body.main.temp_min) - 273.15)
+      const feels = Math.trunc((response.body.main.feels_like) - 273.15)
       const fahreinheit = Math.trunc((((response.body.main.temp)-273.15)*1.8)+32)
-      callback(undefined, `It's currently ${celsius} degrees in ${location}, with ${response.body.weather[0].description}`)
+      callback(undefined, `It's currently ${celsius} degrees in ${location}. The high is ${max} with a low of ${min} and it feels like ${feels}. There is ${response.body.weather[0].description}`)
     }
   })
 }
